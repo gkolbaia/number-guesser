@@ -11,6 +11,7 @@ const game = document.querySelector('#game'),
       guessBtn = document.querySelector('#guess-btn'),
       guessInput = document.querySelector('#guess-input'),
       message = document.querySelector('.message');
+      triedNumbers = document.getElementById('tried-numbers');
       
       function getRandomNum(min,max){
         return Math.floor(Math.random()*(max-min+1)+min);
@@ -45,7 +46,15 @@ const game = document.querySelector('#game'),
             gameOver();
         }else{
             guessesLeft-=1;
+            //triedNumbers.style.display = 'block';
+            if(guessesLeft==2){
+            triedNumbers.innerHTML  += ' '+ guessInput.value  ;
+            }else{
+                triedNumbers.innerHTML  += ', '+ guessInput.value  ;
+            }
+
             setMessage(`${guessInput.value} is incorrect, ${guessesLeft} guesses left`,'red')
+            guessInput.value = '';
             if(guessesLeft==0){
                 setMessage(`GAME OVER, Correct number was ${winningNum}`);
                 gameOver();
